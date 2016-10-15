@@ -17,7 +17,7 @@ public class MAIN {
 		Bag bag = new Bag(19, KnapSack.getBound(items, 19));
 		
 		//KnapSack
-		KnapSack.knapSack(new Node(0, 0), items, bag);
+		KnapSack.knapSack(items, bag);
 		KnapSack.max.print();
 	}
 

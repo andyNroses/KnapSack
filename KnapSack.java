@@ -3,8 +3,12 @@ import java.util.ArrayList;
 public class KnapSack {
 	
 	public static Node max = new Node(0, 0);
+	
+	public static void knapSack(ArrayList<Item> items, Bag bag) {
+		knapSackAux(new Node(0, 0), items, bag);
+	}
 
-	public static void knapSack(Node node, ArrayList<Item> items, Bag bag) {
+	private static void knapSackAux(Node node, ArrayList<Item> items, Bag bag) {
 		
 		ArrayList<Item> itemsCopy = new ArrayList<Item>();
 		itemsCopy.addAll(items);
@@ -22,7 +26,7 @@ public class KnapSack {
 				leftSon = new Node(node.getCurrentBenefit() + currentItem.getBenefit(), node.getCurrentWeight() + currentItem.getWeight());
 				leftSon.addDecisions(node.getDecisions());
 				leftSon.addDecision(currentItem, true);
-				knapSack(leftSon, itemsCopy, bag);
+				knapSackAux(leftSon, itemsCopy, bag);
 			} else {
 				if (node.getCurrentBenefit() >= max.getCurrentBenefit()) {
 					max = node;
@@ -32,7 +36,7 @@ public class KnapSack {
 			rightSon = new Node(node.getCurrentBenefit(), node.getCurrentWeight());
 			rightSon.addDecisions(node.getDecisions());
 			rightSon.addDecision(currentItem, false);
-			knapSack(rightSon, itemsCopy, bag);
+			knapSackAux(rightSon, itemsCopy, bag);
 		}
 		
 	}
